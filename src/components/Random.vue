@@ -1,7 +1,6 @@
 <template>
   <div class='hello'>
-    <button v-on:click='this.generateRandomColor'>Generate</button>
-    <div v-for='colorStyle in colorStyles' :style='{backgroundColor: colorStyle}'>
+    <div v-for='colorStyle in colorStyles' :style='{backgroundColor: colorStyle}' :key='colorStyle'>
       <h1>{{ colorStyle }}</h1>
     </div>
   </div>
@@ -18,37 +17,27 @@ export default {
   data() {
     return {
       colorStyles: [
-        {
-          backgroundColor: 'rgb(0,0,0)',
-        },
-        {
-          backgroundColor: 'rgb(0,0,0)',
-        },
-        {
-          backgroundColor: 'rgb(0,0,0)',
-        },
-        {
-          backgroundColor: 'rgb(0,0,0)',
-        },
-        {
-          backgroundColor: 'rgb(0,0,0)',
-        },
+        'rgb(0,0,0)',
+        'rgb(0,0,0)',
+        'rgb(0,0,0)',
+        'rgb(0,0,0)',
+        'rgb(0,0,0)',
       ],
+      showModal: true,
     };
   },
   methods: {
     generateRandomColor() {
       const initialColor = tinycolor('rgb(220,69,71)');
       const colorStyles = this.colorStyles.slice();
-      const newColorStyles = colorStyles.map((colorStyle)=> {
-        const newColor = randomColor.generateRandomColor(initialColor);
-        return `rgb(${Math.floor(newColor._r)}, ${Math.floor(newColor._g)}, ${Math.floor(newColor._b)})`;
-      })
+      const newColorStyles = colorStyles.map(() => {
+        const newColor = randomColor.generateRandomColor(initialColor).getOriginalInput();
+        return `rgb(${Math.floor(newColor.r)}, ${Math.floor(newColor.g)}, ${Math.floor(newColor.b)})`;
+      });
       newColorStyles[0] = 'rgb(220,69,71)';
       this.colorStyles = newColorStyles;
-      console.log(this.colorStyles)
       // this.divStyle.fontSize = Math.floor(Math.random() * 100) + 'px';
-    }
+    },
   },
 };
 </script>
@@ -57,5 +46,6 @@ export default {
 <style>
 .hello {
   height: 100%;
+  margin-top: 8vh;
 }
 </style>
