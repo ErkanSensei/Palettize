@@ -1,7 +1,7 @@
 <template>
   <div class='hello'>
-    <div v-for='colorStyle in colorStyles'>
-      <div v-for='color in colorStyle' :style='{backgroundColor: color}' :key='color'>
+    <div v-for='colorStyle in colorStyles' class='palette' :key='colorStyle'>
+      <div v-for='color in colorStyle' class='colorDiv' :style='{backgroundColor: color}' :key='color'>
         <h1>{{ color }}</h1>
       </div>
     </div>
@@ -35,7 +35,7 @@ export default {
       const newColorStyles = [];
       newColorStyles.push(tinycolor(this.$route.params.hexcode).toRgbString());
 
-      for (let i = 0; i < 5; i += 1) {
+      for (let i = 0; i < 4; i += 1) {
         const newColor = randomColor.generateRandomColor(initialColor).getOriginalInput();
         newColorStyles.push(`rgb(${Math.floor(newColor.r)}, ${Math.floor(newColor.g)}, ${Math.floor(newColor.b)})`);
       }
@@ -51,6 +51,15 @@ export default {
 <style>
 .hello {
   height: 100%;
+  margin-top: 10vh;
+}
+.palette {
+  width: 80%;
+  margin: auto;
+  height: 40%;
   margin-top: 8vh;
+}
+.colorDiv {
+  height: 20%;
 }
 </style>
