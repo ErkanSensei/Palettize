@@ -8,7 +8,9 @@
       <div v-if='showModal' class="modal-mask">
         <div class="modal-wrapper">
           <div class="modal-container">
-            <ModalContent />
+            <ModalContent 
+              v-bind='{ openModal, closeModal }'
+            />
           </div>
         </div>
       </div>
@@ -88,9 +90,8 @@ html, body {
 }
 
 .modal-container {
-  width: 300px;
+  width: 80%;
   margin: 0px auto;
-  padding: 20px 30px;
   background-color: #fff;
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
