@@ -1,7 +1,9 @@
 <template>
   <div class='hello'>
-    <div v-for='colorStyle in colorStyles' :style='{backgroundColor: colorStyle}' :key='colorStyle'>
-      <h1>{{ colorStyle }}</h1>
+    <div v-for='colorStyle in colorStyles'>
+      <div v-for='color in colorStyle' :style='{backgroundColor: color}' :key='color'>
+        <h1>{{ color }}</h1>
+      </div>
     </div>
   </div>
 </template>
@@ -12,37 +14,33 @@ import randomColor from '../utils/randomColor';
 
 export default {
   name: 'HelloWorld',
-  mounted() {
-    console.log(this.$route.params);
-  },
   data() {
     return {
-      colorStyles: [
-        'rgb(0,0,0)',
-        'rgb(0,0,0)',
-        'rgb(0,0,0)',
-        'rgb(0,0,0)',
-        'rgb(0,0,0)',
-      ],
+      colorStyles: [],
       showModal: true,
     };
   },
   watch: {
-    $route(to, from) {
-      console.log('from', from);
-      console.log('to', to);
-    }
+    $route() {
+      this.colorStyles = [];
+      for (let i = 0; i < 10; i += 1) {
+        this.generateRandomColor();
+      }
+    },
   },
   methods: {
     generateRandomColor() {
-      const initialColor = tinycolor('rgb(220,69,71)');
+      const initialColor = tinycolor(this.$route.params.hexcode);
       const colorStyles = this.colorStyles.slice();
-      const newColorStyles = colorStyles.map(() => {
+      const newColorStyles = [];
+      newColorStyles.push(tinycolor(this.$route.params.hexcode).toRgbString());
+
+      for (let i = 0; i < 5; i += 1) {
         const newColor = randomColor.generateRandomColor(initialColor).getOriginalInput();
-        return `rgb(${Math.floor(newColor.r)}, ${Math.floor(newColor.g)}, ${Math.floor(newColor.b)})`;
-      });
-      newColorStyles[0] = 'rgb(220,69,71)';
-      this.colorStyles = newColorStyles;
+        newColorStyles.push(`rgb(${Math.floor(newColor.r)}, ${Math.floor(newColor.g)}, ${Math.floor(newColor.b)})`);
+      }
+      colorStyles.push(newColorStyles);
+      this.colorStyles = colorStyles;
       // this.divStyle.fontSize = Math.floor(Math.random() * 100) + 'px';
     },
   },

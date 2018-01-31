@@ -8,13 +8,6 @@
       >
         Submit
       </button>
-      <button
-        :style='{ backgroundColor: defaultColorProps.hex }'
-        class='modalButton'
-        @click='closeModal'
-      >
-        Cancel
-      </button>
   </div>
 </template>
 <script>
