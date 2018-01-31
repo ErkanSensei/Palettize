@@ -4,7 +4,7 @@
       <button
         :style='{ backgroundColor: defaultColorProps.hex }'
         class='modalButton'
-        @click='closeModal'
+        @click='submit'
       >
         Submit
       </button>
@@ -24,7 +24,7 @@ export default {
   components: {
     'chrome-picker': Chrome,
   },
-  props: ['openModal', 'closeModal'],
+  props: ['closeModal', 'submitColor'],
   data() {
     return {
       defaultColorProps: {
@@ -54,6 +54,9 @@ export default {
   methods: {
     updateValue(e) {
       this.defaultColorProps = e;
+    },
+    submit() {
+      this.submitColor(this.defaultColorProps.hex);
     },
   },
 };

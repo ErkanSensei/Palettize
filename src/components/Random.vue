@@ -13,6 +13,7 @@ import randomColor from '../utils/randomColor';
 export default {
   name: 'HelloWorld',
   mounted() {
+    console.log(this.$route.params);
   },
   data() {
     return {
@@ -25,6 +26,12 @@ export default {
       ],
       showModal: true,
     };
+  },
+  watch: {
+    $route(to, from) {
+      console.log('from', from);
+      console.log('to', to);
+    }
   },
   methods: {
     generateRandomColor() {

@@ -3,13 +3,13 @@
     <Header
       v-bind='{ openModal, closeModal }'
     />
-    <router-view/>
+    <router-view />
     <transition name="modal">
       <div v-if='showModal' class="modal-mask">
         <div class="modal-wrapper">
           <div class="modal-container">
             <ModalContent 
-              v-bind='{ openModal, closeModal }'
+              v-bind='{ closeModal, submitColor }'
             />
           </div>
         </div>
@@ -39,6 +39,10 @@ export default {
     },
     openModal() {
       this.showModal = true;
+    },
+    submitColor(color) {
+      this.$router.push({ name: 'Random', params: { hexcode: color.substring(1, color.length) } });
+      this.closeModal();
     },
   },
 };
