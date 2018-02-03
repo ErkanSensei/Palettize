@@ -1,5 +1,5 @@
 <template>
-  <div class='hello'>
+  <div class='hello' v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
     <div v-for='colorStyle in colorStyles' class='palette' :key='colorStyle'>
       <div v-for='color in colorStyle' class='colorDiv' :style='{backgroundColor: color}' :key='color'>
         <h1>{{ color }}</h1>
@@ -20,12 +20,14 @@ export default {
       showModal: true,
     };
   },
+  mounted() {
+    this.colorStyles = [];
+    this.loadMore();
+  },
   watch: {
     $route() {
       this.colorStyles = [];
-      for (let i = 0; i < 10; i += 1) {
-        this.generateRandomColor();
-      }
+      this.loadMore();
     },
   },
   methods: {
@@ -43,6 +45,11 @@ export default {
       this.colorStyles = colorStyles;
       // this.divStyle.fontSize = Math.floor(Math.random() * 100) + 'px';
     },
+    loadMore() {
+      for (let i = 0; i < 10; i += 1) {
+        this.generateRandomColor();
+      }
+    },
   },
 };
 </script>
@@ -50,13 +57,12 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 .hello {
-  height: 100%;
   margin-top: 10vh;
 }
 .palette {
   width: 80%;
   margin: auto;
-  height: 40%;
+  height: 40vh;
   margin-top: 8vh;
 }
 .colorDiv {
