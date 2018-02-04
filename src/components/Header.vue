@@ -32,7 +32,7 @@ export default {
 #header {
     height: 8vh;
     width: 100%;
-    background-color: red;
+    background-color: white;
     position: fixed;
     top: 0;
 }

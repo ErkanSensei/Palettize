@@ -59,27 +59,41 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 .hello {
-  margin-top: 10vh;
+  margin-top: 8vh;
+  background-color: #FAFAFA;
 }
 .palette {
   width: 350px;
   margin: auto;
   height: 40vh;
-  margin-top: 8vh;
+  margin-top: 4vh;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
   display: inline-block;
-  box-shadow: 0px 10px 40px -10px rgba(0,64,128,0.2);
+  box-shadow: 0px 10px 40px -10px rgba(0,64,128,0.1);
 }
 .colorDiv {
   height: 15%;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  margin: auto;
 }
 
 @media (min-width: 420px) {
   .palette {
     margin-left: 80px;
     margin-right: 80px;
+  }
+}
+
+@media (max-width: 419px) {
+  .palette {
+    margin-top: 4vh;
+    width: 80%;
+    height: 60vh;
   }
 }
 </style>
