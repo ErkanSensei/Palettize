@@ -4,6 +4,8 @@
       <div v-for='color in colorStyle' class='colorDiv' :style='{backgroundColor: color}' :key='color'>
         <h1>{{ color }}</h1>
       </div>
+      <div>HEART</div>
+      <div>EXAMPLE</div>
     </div>
   </div>
 </template>
@@ -35,11 +37,11 @@ export default {
       const initialColor = tinycolor(this.$route.params.hexcode);
       const colorStyles = this.colorStyles.slice();
       const newColorStyles = [];
-      newColorStyles.push(tinycolor(this.$route.params.hexcode).toRgbString());
+      newColorStyles.push(tinycolor(this.$route.params.hexcode).toHexString());
 
       for (let i = 0; i < 4; i += 1) {
-        const newColor = randomColor.generateRandomColor(initialColor).getOriginalInput();
-        newColorStyles.push(`rgb(${Math.floor(newColor.r)}, ${Math.floor(newColor.g)}, ${Math.floor(newColor.b)})`);
+        const newColor = randomColor.generateRandomColor(initialColor).toHexString();
+        newColorStyles.push(newColor);
       }
       colorStyles.push(newColorStyles);
       this.colorStyles = colorStyles;
@@ -60,12 +62,24 @@ export default {
   margin-top: 10vh;
 }
 .palette {
-  width: 80%;
+  width: 350px;
   margin: auto;
   height: 40vh;
   margin-top: 8vh;
+  display: inline-block;
+  box-shadow: 0px 10px 40px -10px rgba(0,64,128,0.2);
 }
 .colorDiv {
-  height: 20%;
+  height: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 420px) {
+  .palette {
+    margin-left: 80px;
+    margin-right: 80px;
+  }
 }
 </style>
