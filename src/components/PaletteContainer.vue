@@ -1,24 +1,25 @@
 <template>
   <div class='hello' v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
-    <div v-for='colorStyle in colorStyles' class='palette' :key='colorStyle'>
+    <div v-for='colorStyle in colorStyles' class='palette' :key='colorStyle.toString()'>
       <div v-for='color in colorStyle' class='colorDiv' :style='{backgroundColor: color}' :key='color'>
         <h1>{{ color }}</h1>
       </div>
-      <div>HEART</div>
-      <div>EXAMPLE</div>
+      <div id='likeButton'>HEART</div>
+      <div id='esampleButton'>EXAMPLE</div>
     </div>
   </div>
 </template>
 
 <script>
 import tinycolor from 'tinycolor2';
-import randomColor from '../utils/randomColor';
+import colorAlgos from '../utils/colorAlgos';
 
 export default {
   name: 'HelloWorld',
   data() {
     return {
       colorStyles: [],
+      randomize: true,
       showModal: true,
     };
   },
@@ -33,14 +34,14 @@ export default {
     },
   },
   methods: {
-    generateRandomColor() {
-      const initialColor = tinycolor(this.$route.params.hexcode);
+    generateRandomMix(color) {
+      const initialColor = tinycolor(color);
       const colorStyles = this.colorStyles.slice();
       const newColorStyles = [];
-      newColorStyles.push(tinycolor(this.$route.params.hexcode).toHexString());
+      newColorStyles.push(tinycolor(color).toHexString());
 
       for (let i = 0; i < 4; i += 1) {
-        const newColor = randomColor.generateRandomColor(initialColor).toHexString();
+        const newColor = colorAlgos.generateRandomColor(initialColor).toHexString();
         newColorStyles.push(newColor);
       }
       colorStyles.push(newColorStyles);
@@ -49,7 +50,7 @@ export default {
     },
     loadMore() {
       for (let i = 0; i < 10; i += 1) {
-        this.generateRandomColor();
+        this.generateRandomMix(this.randomize ? tinycolor.random() : this.$route.params.hexcode);
       }
     },
   },

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Random from '@/components/Random';
+import PaletteContainer from '@/components/PaletteContainer';
 
 Vue.use(Router);
 
@@ -9,8 +9,8 @@ export default new Router({
   routes: [
     {
       path: '/:hexcode',
-      name: 'Random',
-      component: Random,
+      name: 'PaletteContainer',
+      component: PaletteContainer,
     },
   ],
 });

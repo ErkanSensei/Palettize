@@ -9,7 +9,7 @@
         <div class="modal-wrapper">
           <div class="modal-container">
             <ModalContent 
-              v-bind='{ closeModal, submitColor }'
+              v-bind='{ closeModal, submitColor, random }'
             />
           </div>
         </div>
@@ -27,6 +27,7 @@ export default {
   data() {
     return {
       showModal: false,
+      random: false,
     };
   },
   components: {
@@ -37,11 +38,12 @@ export default {
     closeModal() {
       this.showModal = false;
     },
-    openModal() {
+    openModal(random) {
+      this.random = random;
       this.showModal = true;
     },
     submitColor(color) {
-      this.$router.push({ name: 'Random', params: { hexcode: color.substring(1, color.length) } });
+      this.$router.push({ name: 'PaletteContainer', params: { hexcode: color.substring(1, color.length) } });
       this.closeModal();
     },
   },

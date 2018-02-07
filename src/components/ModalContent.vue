@@ -1,23 +1,45 @@
 <template>
-  <div>
-      <chrome-picker :value='defaultColorProps' @input='updateValue' />
+  <div id='modalContent'>
+      <h1 v-if='random'><Icon name='random' scale=10 /></h1>
+      <h1 v-if='random'>Randomize palettes?</h1>
+      <chrome-picker v-else :value='defaultColorProps' @input='updateValue' />
+      <button
+        :style='{ backgroundColor: "#2C3E50" }'
+        class='randomModalButton'
+        @click='submit'
+        v-if='random'
+      >
+        <p>Yup</p>
+      </button>
+      <button
+        :style='{ backgroundColor: "#2C3E50" }'
+        class='randomModalButton'
+        @click='submit'
+        v-if='random'
+      >
+        <p>Nope</p>
+      </button>
       <button
         :style='{ backgroundColor: defaultColorProps.hex }'
         class='modalButton'
         @click='submit'
+        v-else
       >
-        Submit
+        <p>Submit</p>
       </button>
   </div>
 </template>
 <script>
 import { Chrome } from 'vue-color';
+import Icon from 'vue-awesome/components/Icon';
+import 'vue-awesome/icons/random';
 
 export default {
   components: {
     'chrome-picker': Chrome,
+    Icon,
   },
-  props: ['closeModal', 'submitColor'],
+  props: ['closeModal', 'submitColor', 'random'],
   data() {
     return {
       defaultColorProps: {
@@ -69,6 +91,19 @@ export default {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-
+}
+.randomModalButton {
+  margin: 10px;
+  width: 100px;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+#modalContent > h1 {
+  font-size: 25px;
 }
 </style>

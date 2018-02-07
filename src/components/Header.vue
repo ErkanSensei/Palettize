@@ -1,9 +1,13 @@
 <template>
   <div id='header'>
-      <button @click='openModal' id='refreshButton'>
-        <Icon name='refresh' scale=1.5 />
+      <button @click='openModal' id='randomButton'>
+        <Icon name='random' scale=1.5 />
       </button>
-      <h1>This is a header</h1>
+      <button @click='openModal(random)' id='filterButton'>
+        <Icon name='filter' scale=1.5 />
+      </button>
+      <span id='helper'></span>
+      <img src='../assets/Logo.png' id='logo' />
       <button @click='openModal' id='favoritesButton'>
         <Icon name='heart-o' scale=1.5 />
       </button>
@@ -11,8 +15,10 @@
 </template>
 
 <script>
-import 'vue-awesome/icons/refresh';
+import 'vue-awesome/icons/random';
 import 'vue-awesome/icons/heart-o';
+import 'vue-awesome/icons/filter';
+
 import Icon from 'vue-awesome/components/Icon';
 
 export default {
@@ -20,11 +26,6 @@ export default {
     Icon,
   },
   props: ['openModal'],
-  methods: {
-    openMenu() {
-      alert('clicked')
-    },
-  },
 };
 </script>
 
@@ -33,19 +34,42 @@ export default {
     height: 8vh;
     width: 100%;
     background-color: white;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,.0975);
     position: fixed;
     top: 0;
 }
 
-#refreshButton {
+#logo {
+  height: 100%;
+  vertical-align: middle;
+}
+
+#helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+#filterButton {
   position: absolute;
   left: 5vw;
   top: calc(50% - 12px);
+  color: rgba(0,0,0,0.3);
+}
+
+#randomButton {
+  position: absolute;
+  left: 15vw;
+  top: calc(50% - 12px);
+  color: rgba(0,0,0,0.3);
 }
 
 #favoritesButton {
   position: absolute;
   right: 5vw;
   top: calc(50% - 12px);
+  color: rgba(0,0,0,0.3);
 }
 </style>
