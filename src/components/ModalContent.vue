@@ -1,12 +1,16 @@
 <template>
   <div id='modalContent'>
-      <h1 v-if='random'><Icon name='random' scale=10 /></h1>
-      <h1 v-if='random'>Randomize palettes?</h1>
+      <h1 v-if='random'>
+        <Icon name='random' scale=10 />
+      </h1>
+      <h1 v-if='random'>
+        Randomize palettes?
+      </h1>
       <chrome-picker v-else :value='defaultColorProps' @input='updateValue' />
       <button
         :style='{ backgroundColor: "#2C3E50" }'
         class='randomModalButton'
-        @click='submit'
+        @click='submit(true)'
         v-if='random'
       >
         <p>Yup</p>
@@ -14,7 +18,7 @@
       <button
         :style='{ backgroundColor: "#2C3E50" }'
         class='randomModalButton'
-        @click='submit'
+        @click='closeModal'
         v-if='random'
       >
         <p>Nope</p>
@@ -71,7 +75,11 @@ export default {
       this.defaultColorProps = e;
     },
     submit() {
-      this.submitColor(this.defaultColorProps.hex);
+      if (this.random) {
+        this.submitColor('#random');
+      } else {
+        this.submitColor(this.defaultColorProps.hex);
+      }
     },
   },
 };

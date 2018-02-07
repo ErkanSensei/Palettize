@@ -39,6 +39,7 @@ export default {
       this.showModal = false;
     },
     openModal(random) {
+      console.log(random)
       this.random = random;
       this.showModal = true;
     },

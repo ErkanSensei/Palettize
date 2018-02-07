@@ -1,14 +1,14 @@
 <template>
   <div id='header'>
-      <button @click='openModal' id='randomButton'>
+      <button @click='openModal(true)' id='randomButton'>
         <Icon name='random' scale=1.5 />
       </button>
-      <button @click='openModal(random)' id='filterButton'>
+      <button @click='openModal(false)' id='filterButton'>
         <Icon name='filter' scale=1.5 />
       </button>
       <span id='helper'></span>
       <img src='../assets/Logo.png' id='logo' />
-      <button @click='openModal' id='favoritesButton'>
+      <button @click='openModal(false)' id='favoritesButton'>
         <Icon name='heart-o' scale=1.5 />
       </button>
   </div>

@@ -19,7 +19,6 @@ export default {
   data() {
     return {
       colorStyles: [],
-      randomize: true,
       showModal: true,
     };
   },
@@ -50,7 +49,7 @@ export default {
     },
     loadMore() {
       for (let i = 0; i < 10; i += 1) {
-        this.generateRandomMix(this.randomize ? tinycolor.random() : this.$route.params.hexcode);
+        this.generateRandomMix(this.$route.params.hexcode === 'random' ? tinycolor.random() : this.$route.params.hexcode);
       }
     },
   },
